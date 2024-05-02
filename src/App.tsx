@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
-import './App.css';
+import React from 'react';
+import Home from './components/Home';
 
 const App: React.FC = () => {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="card">
-      <button onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
-    </div>
+    <Home />
   )
 }
 
