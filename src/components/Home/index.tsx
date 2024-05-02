@@ -1,24 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { RefObject, useEffect, useRef } from 'react';
 import { Grid } from '@mui/material';
 import './Home.css';
 import { useGetJobsMutation } from '../../services/jobs';
-import { appendNewJobs } from '../../reducers/jobs';
+import { appendNewJobs, setLoading } from '../../reducers/jobs';
 import { Job } from '../../types/job';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import JobCard from '../JobCard';
+import useLazyLoad from '../../hooks/useLazyLoad';
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
-    const jobs = useAppSelector((store) => store.jobs)
+    const jobs = useAppSelector((store) => store.jobs);
+    const loadMoreRef: RefObject<HTMLDivElement> = useRef(null);
 
     const [getJobsApi, getJobsApiResponse] = useGetJobsMutation();
 
     const fetchJobs = () => {
+        dispatch(setLoading())
         getJobsApi({
             limit: jobs.limit,
             offset: jobs.offset,
         });
     }
+
+    const {} = useLazyLoad({ triggerRef: loadMoreRef, fetchData: fetchJobs});
 
     useEffect(() => {
         fetchJobs();
@@ -40,6 +45,7 @@ const Home: React.FC = () => {
                     </Grid>
                 )
             })}
+            <div ref={loadMoreRef}></div>
             </Grid>
         </div>
     )
