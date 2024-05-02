@@ -1,0 +1,143 @@
+.job-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 360px;
+    border-radius: 20px !important;
+    padding: 16px;
+    margin: 0px 6px;
+    border: 0.2px solid rgba(230, 230, 230, 0.815);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.job-card:hover {
+    transform: scale(1.01);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.job-card-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    gap: 16px;
+}
+
+.job-card-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.job-card-header img {
+    width: auto;
+    height: 2.3rem;
+}
+
+.job-card-info>h3 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+    color: #8b8b8b;
+}
+
+.job-card-info>h2 {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.job-card-info-location {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.job-card-content .job-card-salary {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgb(77, 89, 106);
+    line-height: 1.43;
+    font-family: 'Lexend', sans-serif;
+}
+
+.job-card-description-container {
+    height: 250px;
+    overflow: hidden;
+    mask-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255), rgba(255, 255, 255, 0));
+}
+
+.job-card-description-container .job-card-about {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+    font-family: 'Lexend', sans-serif;
+}
+
+.job-card-description-container>p {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.job-card-description-more {
+    text-align: center;
+    position: relative;
+    top: -25px;
+}
+
+.job-card-description-more a {
+    cursor: pointer;
+    color: #4943da;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.job-card-experience-container>h3 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #8b8b8b;
+}
+
+.job-card-experience-container>h2 {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 300;
+}
+
+.job-card-footer {
+    width: 100%;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-card-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.job-card-btn-container .job-card-footer-btn {
+    width: 100%;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    padding: 8px 18px;
+    text-transform: none;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Lexend', sans-serif;
+}
+
+.job-card-footer-btn.apply-btn, .job-card-footer-btn.apply-btn:hover {
+    background-color: rgb(85, 239, 196);
+}

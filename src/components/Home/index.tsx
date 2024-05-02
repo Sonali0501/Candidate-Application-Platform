@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import { Grid } from '@mui/material';
 import './Home.css';
 import { useGetJobsMutation } from '../../services/jobs';
 import { appendNewJobs } from '../../reducers/jobs';
 import { Job } from '../../types/job';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import JobCard from '../JobCard';
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -30,13 +32,15 @@ const Home: React.FC = () => {
 
     return (
         <div className="home">
+            <Grid container spacing={"3"} className="jobs-container-grid">
             {jobs?.data?.map((job: Job) => {
                 return (
-                    <div key={job.jdUid} className="job-card">
-                        <h1>{job.jobRole}</h1>
-                    </div>
+                    <Grid item xs={12} md={6} lg={4} xl={3} className="jobs-grid-item">
+                        <JobCard key={job.jdUid} data={job} />
+                    </Grid>
                 )
             })}
+            </Grid>
         </div>
     )
 }

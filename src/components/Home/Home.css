@@ -1,0 +1,12 @@
+.jobs-container-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    row-gap: 24px;
+    padding: 25px;
+}
+
+.jobs-grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
