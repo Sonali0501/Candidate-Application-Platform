@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
 import { Grid } from '@mui/material';
 import './Home.css';
 import { useGetJobsMutation } from '../../services/jobs';
@@ -7,11 +7,14 @@ import { Job } from '../../types/job';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import JobCard from '../JobCard';
 import useLazyLoad from '../../hooks/useLazyLoad';
+import Filters from '../Filters';
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
     const jobs = useAppSelector((store) => store.jobs);
+    const { experience, role, location } = useAppSelector((store) => store.filters);
     const loadMoreRef: RefObject<HTMLDivElement> = useRef(null);
+    const [filteredJobs, setFilteredJobs] = useState(jobs?.data);
 
     const [getJobsApi, getJobsApiResponse] = useGetJobsMutation();
 
@@ -30,6 +33,26 @@ const Home: React.FC = () => {
     }, [])
 
     useEffect(() => {
+        let newJobs = jobs.data;
+        if (role?.length) {
+            newJobs = newJobs.filter(job => role.toLowerCase() === job.jobRole.toLowerCase());
+        }
+        if (experience?.length) {
+            newJobs = newJobs.filter(job => {
+                const exp = Number(experience);
+                if (!job.minExp && !job.maxExp) return true;
+                else if (!job.minExp) {
+                    return job.maxExp! >= exp;
+                }
+                else if (job.maxExp) {
+                    return job.minExp <= exp;
+                }
+            });
+        }
+        setFilteredJobs(newJobs);
+    }, [jobs.data, role, experience])
+
+    useEffect(() => {
         if (getJobsApiResponse.isSuccess) {
             dispatch(appendNewJobs(getJobsApiResponse.data?.jdList));
         }
@@ -37,11 +60,12 @@ const Home: React.FC = () => {
 
     return (
         <div className="home">
+            <Filters />
             <Grid container spacing={"3"} className="jobs-container-grid">
-            {jobs?.data?.map((job: Job) => {
+            {filteredJobs?.map((job: Job) => {
                 return (
-                    <Grid item xs={12} md={6} lg={4} xl={3} className="jobs-grid-item">
-                        <JobCard key={job.jdUid} data={job} />
+                    <Grid key={job.jdUid} item xs={12} md={6} lg={4} xl={3} className="jobs-grid-item">
+                        <JobCard data={job} />
                     </Grid>
                 )
             })}

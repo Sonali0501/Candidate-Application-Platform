@@ -9,4 +9,6 @@ export interface Job {
     minExp?: number;
     maxExp?: number;
     jobRole: string;
+    logoUrl?: string;
+    companyName?: string;
 }

@@ -10,12 +10,12 @@ const JobCard: React.FC<{ data: Job }> = ({ data }) => {
             <CardContent className="job-card-content">
                 <Box className="job-card-header">
                     <img
-                        src="https://firebasestorage.googleapis.com/v0/b/weekday-works.appspot.com/o/referal-website-assets%2Ffavicon-64.png?alt=media"
+                        src={data.logoUrl || "https://firebasestorage.googleapis.com/v0/b/weekday-works.appspot.com/o/referal-website-assets%2Ffavicon-64.png?alt=media"}
                         alt="Company Logo"
                     />
                     <div>
                         <div className="job-card-info">
-                            <h3>Weekday</h3>
+                            <h3>{data.companyName || "Weekday"}</h3>
                             <h2>{data.jobRole || "Role Not Specified"}</h2>
                         </div>
                         <p className="job-card-info-location">
