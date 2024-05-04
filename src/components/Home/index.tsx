@@ -1,5 +1,5 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react';
-import { Grid } from '@mui/material';
+import { Box, CircularProgress, Grid } from '@mui/material';
 import './Home.css';
 import { useGetJobsMutation } from '../../services/jobs';
 import { appendNewJobs, setLoading } from '../../reducers/jobs';
@@ -78,7 +78,11 @@ const Home: React.FC = () => {
                     </Grid>
                 )
             })}
-            <div ref={loadMoreRef}>Loading...</div>
+            <div ref={loadMoreRef}>
+            <Box sx={{ display: 'flex', padding: '100px' }}>
+                <CircularProgress />
+            </Box>
+            </div>
             </Grid>
         </div>
     )
