@@ -5,6 +5,7 @@ const initialState : {
     role?: string;
     location?: string;
     experience?: string;
+    company?: string;
 } = {}
 
 export const filtersSlice = createSlice({

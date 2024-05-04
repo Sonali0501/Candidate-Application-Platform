@@ -12,7 +12,7 @@ import Filters from '../Filters';
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
     const jobs = useAppSelector((store) => store.jobs);
-    const { experience, role, location } = useAppSelector((store) => store.filters);
+    const { experience, role, location, company } = useAppSelector((store) => store.filters);
     const loadMoreRef: RefObject<HTMLDivElement> = useRef(null);
     const [filteredJobs, setFilteredJobs] = useState(jobs?.data);
 
@@ -49,8 +49,17 @@ const Home: React.FC = () => {
                 }
             });
         }
+        if (company?.length) {
+            newJobs = newJobs.filter(job => {
+                if (job.companyName) return job.companyName.toLowerCase().includes(company.toLowerCase());
+                else return false;
+            });
+        }
+        if (location?.length) {
+            newJobs = newJobs.filter(job => job.location.toLowerCase().includes(location.toLowerCase()));
+        }
         setFilteredJobs(newJobs);
-    }, [jobs.data, role, experience])
+    }, [jobs.data, role, experience, company, location])
 
     useEffect(() => {
         if (getJobsApiResponse.isSuccess) {
@@ -69,7 +78,7 @@ const Home: React.FC = () => {
                     </Grid>
                 )
             })}
-            <div ref={loadMoreRef}></div>
+            <div ref={loadMoreRef}>Loading...</div>
             </Grid>
         </div>
     )

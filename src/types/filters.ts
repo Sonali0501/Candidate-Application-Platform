@@ -1,1 +1,1 @@
-export type Filters = 'role' | 'experience' | 'location';
+export type Filters = 'role' | 'experience' | 'location' | 'company';
